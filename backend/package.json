@@ -6,7 +6,13 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest",
+    "test": "jest --passWithNoTests --no-cache --runInBand --forceExit",
+    "test:unit": "npm test -- -c jest-unit-config.js",
+    "test:watch": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:coverage": "npm test -- --coverage",
+    "test:staged": "npm test -- --findRelatedTests",
+    "clear_jest": "jest --clearCache",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -19,6 +25,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.7",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "eslint": "^8.57.1",
