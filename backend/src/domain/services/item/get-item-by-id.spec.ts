@@ -29,4 +29,11 @@ describe('Name of the group', () => {
     expect(itemRepository.getById).toHaveBeenCalledWith({ id: input.id })
     expect(itemRepository.getById).toHaveBeenCalledTimes(1)
   })
+
+  it('should throw if ItemRepository throws', async () => {
+    itemRepository.getById.mockRejectedValueOnce(new Error('load_error'))
+
+    const promise = sut.getById(input)
+    await expect(promise).rejects.toThrow(new Error('load_error'))
+  })
 })
