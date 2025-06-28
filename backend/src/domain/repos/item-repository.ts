@@ -1,12 +1,17 @@
 import { Item } from '@/domain/entities'
 
 export interface ItemRepository {
+  getStats: () => Promise<ItemRepository.GetStatsOutput>
   getByFilter: (input: ItemRepository.GetByFilterInput) => Promise<ItemRepository.GetAllOutput>
   getById: (input: ItemRepository.GetByIdInput) => Promise<ItemRepository.GetByIdOutput>
   save: (input: ItemRepository.SaveInput) => Promise<ItemRepository.SaveOutput>
 }
 
 export namespace ItemRepository {
+  export type GetStatsOutput = {
+    total: number
+    averagePrice: number
+  }
   export type GetByFilterInput = {
     query?: string
     limit?: number
