@@ -16,8 +16,12 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "@types/node": "^24.0.7",
     "jest": "^29.7.0",
     "nodemon": "^3.0.2",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
   }
 }
