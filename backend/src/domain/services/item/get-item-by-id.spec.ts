@@ -6,7 +6,7 @@ import { GetItemById } from '@/domain/usecases'
 import { mockItem } from '@/domain/test'
 import { faker } from '@faker-js/faker/.'
 
-describe('Name of the group', () => {
+describe('GetItemByIdService', () => {
   let sut: GetItemByIdService
   let itemRepository: MockProxy<ItemRepository>
   let item: GetItemById.Output
@@ -16,7 +16,7 @@ describe('Name of the group', () => {
     input = { id: faker.number.int({ min: 1, max: 1000 }) }
     item = mockItem()
     itemRepository = mock()
-    sut = new GetItemByIdService(itemRepository)
+    itemRepository.getById.mockResolvedValue(item)
   })
 
   beforeEach(() => {
@@ -35,5 +35,10 @@ describe('Name of the group', () => {
 
     const promise = sut.getById(input)
     await expect(promise).rejects.toThrow(new Error('load_error'))
+  })
+
+  it('should return an item on success', async () => {
+    const result = await sut.getById(input)
+    expect(result).toEqual(item)
   })
 })
