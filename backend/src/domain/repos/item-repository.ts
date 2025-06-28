@@ -1,12 +1,16 @@
 import { Item } from '@/domain/entities'
 
 export interface ItemRepository {
-  getAll: () => Promise<ItemRepository.GetAllOutput>
+  getByFilter: (input: ItemRepository.GetByFilterInput) => Promise<ItemRepository.GetAllOutput>
   getById: (input: ItemRepository.GetByIdInput) => Promise<ItemRepository.GetByIdOutput>
   save: (input: ItemRepository.SaveInput) => Promise<ItemRepository.SaveOutput>
 }
 
 export namespace ItemRepository {
+  export type GetByFilterInput = {
+    query?: string
+    limit?: number
+  }
   export type GetAllOutput = Item[]
   export type GetByIdOutput = Item | null
   export type SaveOutput = Item
