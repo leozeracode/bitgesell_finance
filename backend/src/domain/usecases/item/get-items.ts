@@ -1,15 +1,14 @@
-import { Item } from "../../entities/item";
+import { Item } from '@/domain/entities/item'
 
 export interface GetItems {
-  get(input: GetItems.Input): Promise<Item>
+  get: (input: GetItems.Input) => Promise<Item>
 }
-
 
 export namespace GetItems {
   export type Input = {
     query?: string
     limit?: number
-  }  
+  }
 
   export type Output = Item[]
 }
