@@ -1,4 +1,4 @@
-import { Item } from '@/domain/entities/item'
+import { Item } from '@/domain/entities'
 
 export interface CreateItem {
   create: (input: CreateItem.Input) => Promise<CreateItem.Output>

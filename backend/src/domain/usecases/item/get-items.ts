@@ -1,7 +1,7 @@
-import { Item } from '@/domain/entities/item'
+import { Item } from '@/domain/entities'
 
 export interface GetItems {
-  get: (input: GetItems.Input) => Promise<Item>
+  get: (input: GetItems.Input) => Promise<GetItems.Output>
 }
 
 export namespace GetItems {
