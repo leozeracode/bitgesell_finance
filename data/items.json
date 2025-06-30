@@ -1,7 +1,195 @@
 [
-  { "id": 1, "name": "Laptop Pro", "category": "Electronics", "price": 2499 },
-  { "id": 2, "name": "Noise Cancelling Headphones", "category": "Electronics", "price": 399 },
-  { "id": 3, "name": "Ultra‑Wide Monitor", "category": "Electronics", "price": 999 },
-  { "id": 4, "name": "Ergonomic Chair", "category": "Furniture", "price": 799 },
-  { "id": 5, "name": "Standing Desk", "category": "Furniture", "price": 1199 }
+  {
+    "id": 1,
+    "name": "Laptop Pro",
+    "category": "Electronics",
+    "price": 2499
+  },
+  {
+    "id": 2,
+    "name": "Noise Cancelling Headphones",
+    "category": "Electronics",
+    "price": 399
+  },
+  {
+    "id": 3,
+    "name": "Ultra‑Wide Monitor",
+    "category": "Electronics",
+    "price": 999
+  },
+  {
+    "id": 4,
+    "name": "Ergonomic Chair",
+    "category": "Furniture",
+    "price": 799
+  },
+  {
+    "id": 5,
+    "name": "Standing Desk",
+    "category": "Furniture",
+    "price": 1199
+  },
+  {
+    "id": 6,
+    "name": "Awesome Wooden Gloves",
+    "price": 462.49,
+    "category": "Grocery"
+  },
+  {
+    "id": 7,
+    "name": "Unbranded Gold Chair",
+    "price": 416.95,
+    "category": "Automotive"
+  },
+  {
+    "id": 8,
+    "name": "Oriental Marble Hat",
+    "price": 361.69,
+    "category": "Movies"
+  },
+  {
+    "id": 9,
+    "name": "Fantastic Bronze Pizza",
+    "price": 549.4,
+    "category": "Home"
+  },
+  {
+    "id": 10,
+    "name": "Frozen Bronze Towels",
+    "price": 803.69,
+    "category": "Books"
+  },
+  {
+    "id": 11,
+    "name": "Frozen Silk Gloves",
+    "price": 293.69,
+    "category": "Computers"
+  },
+  {
+    "id": 12,
+    "name": "Practical Granite Chips",
+    "price": 623.24,
+    "category": "Computers"
+  },
+  {
+    "id": 13,
+    "name": "Generic Concrete Keyboard",
+    "price": 857.8,
+    "category": "Home"
+  },
+  {
+    "id": 14,
+    "name": "Tasty Bronze Sausages",
+    "price": 759.59,
+    "category": "Music"
+  },
+  {
+    "id": 15,
+    "name": "Recycled Gold Shirt",
+    "price": 786.59,
+    "category": "Movies"
+  },
+  {
+    "id": 16,
+    "name": "Licensed Cotton Gloves",
+    "price": 590.25,
+    "category": "Computers"
+  },
+  {
+    "id": 17,
+    "name": "Soft Plastic Soap",
+    "price": 484.67,
+    "category": "Movies"
+  },
+  {
+    "id": 18,
+    "name": "Recycled Ceramic Fish",
+    "price": 650.3,
+    "category": "Games"
+  },
+  {
+    "id": 19,
+    "name": "Recycled Bamboo Towels",
+    "price": 169.75,
+    "category": "Tools"
+  },
+  {
+    "id": 20,
+    "name": "Elegant Metal Sausages",
+    "price": 665.49,
+    "category": "Books"
+  },
+  {
+    "id": 21,
+    "name": "Oriental Marble Hat",
+    "price": 315.49,
+    "category": "Toys"
+  },
+  {
+    "id": 22,
+    "name": "Sleek Metal Car",
+    "price": 455.29,
+    "category": "Industrial"
+  },
+  {
+    "id": 23,
+    "name": "Fantastic Rubber Mouse",
+    "price": 167.09,
+    "category": "Books"
+  },
+  {
+    "id": 24,
+    "name": "Intelligent Gold Table",
+    "price": 922.79,
+    "category": "Garden"
+  },
+  {
+    "id": 25,
+    "name": "Fresh Metal Pizza",
+    "price": 751.35,
+    "category": "Electronics"
+  },
+  {
+    "id": 26,
+    "name": "Handcrafted Rubber Table",
+    "price": 367.19,
+    "category": "Outdoors"
+  },
+  {
+    "id": 27,
+    "name": "Soft Gold Hat",
+    "price": 140.59,
+    "category": "Clothing"
+  },
+  {
+    "id": 28,
+    "name": "Awesome Rubber Table",
+    "price": 985.3,
+    "category": "Beauty"
+  },
+  {
+    "id": 29,
+    "name": "Luxurious Bamboo Pizza",
+    "price": 204.05,
+    "category": "Kids"
+  },
+  {
+    "id": 30,
+    "name": "Tasty Granite Salad",
+    "price": 931.59,
+    "category": "Toys"
+  },
+  {
+    "id": 31,
+    "name": "Small Bamboo Chicken",
+    "price": 495.25,
+    "category": "Shoes"
+  },
+  {
+    "id": 32,
+    "name": "Awesome Wooden Gloves",
+    "price": 462.49,
+    "category": "Grocery",
+    "limit": "4"
+  }
 ]
