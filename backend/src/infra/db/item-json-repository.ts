@@ -32,7 +32,7 @@ export class ItemJsonRepository implements ItemRepository {
 
   async getById ({ id }: ItemRepository.GetByIdInput): Promise<ItemRepository.GetByIdOutput> {
     const items = await this.getByFilter({})
-    return items.find(i => i.id === id) ?? null
+    return items.find(i => i.id === Number(id)) ?? null
   }
 
   async save (input: ItemRepository.SaveInput): Promise<ItemRepository.SaveOutput> {
