@@ -19,7 +19,7 @@ export class CreateItemController extends MainController {
 
   override buildValidators ({ category, name, price }: HttpRequest): Validator[] {
     return [
-      ...Builder.of({ value: category, fieldName: 'name' }).required().build(),
+      ...Builder.of({ value: category, fieldName: 'category' }).required().build(),
       ...Builder.of({ value: name, fieldName: 'name' }).required().build(),
       ...Builder.of({ value: price, fieldName: 'price' }).required().build()
     ]
