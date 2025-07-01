@@ -51,7 +51,8 @@ export class ItemJsonRepository implements ItemRepository {
     const nextId = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
     const item = {
       id: nextId,
-      ...input
+      ...input,
+      price: Number(input.price)
     }
 
     items.push(item)
