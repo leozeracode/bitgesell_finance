@@ -20,17 +20,20 @@ export class ItemJsonRepository implements ItemRepository {
       )
     }
 
-    if (limit) {
-      const start = (page - 1) * limit
-      const end = start + limit
-      items = items.slice(start, end)
-    }
+    const total = items.length
+
+    const pageNum = Number(page) || 1
+    const limitNum = Number(limit) || total
+    const start = (pageNum - 1) * limitNum
+    const end = start + limitNum
+    const paginatedItems = items.slice(start, end)
 
     return {
-      items,
-      total: items.length,
-      page,
-      limit: limit ?? 0
+      items: paginatedItems,
+      total,
+      count: paginatedItems.length,
+      page: pageNum,
+      limit: limitNum
     }
   }
 

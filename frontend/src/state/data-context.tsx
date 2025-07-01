@@ -9,7 +9,7 @@ interface DataContextType {
     limit: number
   }
   loading: boolean
-  fetchItemsData: (params: { q?: string; page?: number; limit?: number; signal?: AbortSignal }) => Promise<void>
+  fetchItemsData: (params: { query?: string; page?: number; limit?: number }, signal?: AbortSignal) => Promise<void>
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined)
@@ -25,14 +25,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchItemsData = useCallback(
     async ({
-      q,
+      query,
       page,
       limit,
       signal,
-    }: { q?: string; page?: number; limit?: number; signal?: AbortSignal }) => {
+    }: { query?: string; page?: number; limit?: number; signal?: AbortSignal }) => {
       setLoading(true)
       try {
-        const data = await fetchItems({ q, page, limit, signal })
+        const data = await fetchItems({ query, page, limit, signal })
         setData(data)
       } catch (e) {
         console.error(e)

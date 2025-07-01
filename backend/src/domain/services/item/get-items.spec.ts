@@ -18,6 +18,7 @@ describe('GetItemsService', () => {
       items: [mockItem(), mockItem(), mockItem()],
       total: 3,
       page: 1,
+      count: 3,
       limit: input.limit ?? 0
     }
     itemRepository = mock()

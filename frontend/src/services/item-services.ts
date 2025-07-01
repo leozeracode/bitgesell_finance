@@ -13,7 +13,7 @@ export type Fetchdata = {
 }
 
 export type FetchItemsParams = {
-  q?: string
+  query?: string
   page?: number
   limit?: number
   signal?: AbortSignal
@@ -24,7 +24,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5555'
 
 export async function fetchItems(params: FetchItemsParams): Promise<Fetchdata> {
   const query = new URLSearchParams()
-  if (params.q) query.append('q', params.q)
+  if (params.query) query.append('query', params.query)
   if (params.page !== undefined) query.append('page', params.page.toString())
   if (params.limit !== undefined) query.append('limit', params.limit.toString())
 
@@ -37,5 +37,19 @@ export async function fetchItems(params: FetchItemsParams): Promise<Fetchdata> {
 export async function fetchItem(id: string, signal: AbortSignal): Promise<Item> {
   const response = await fetch(`${API_URL}/api/item/${id}`, { signal })
   if (!response.ok) throw new Error(`Error fetching item with id ${id}`)
+  return await response.json()
+}
+
+
+export async function createItem(item: Omit<Item, 'id'>): Promise<Item> {
+  const response = await fetch(`${API_URL}/api/item`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(item),
+  })
+
+  if (!response.ok) throw new Error('Error creating item')
   return await response.json()
 }

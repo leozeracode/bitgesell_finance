@@ -22,6 +22,7 @@ export namespace ItemRepository {
     total: number
     page: number
     limit: number
+    count: number
   }
   export type GetByIdOutput = Item | null
   export type SaveOutput = Item

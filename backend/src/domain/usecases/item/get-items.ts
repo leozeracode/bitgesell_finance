@@ -16,5 +16,6 @@ export namespace GetItems {
     total: number
     page: number
     limit: number
+    count: number
   }
 }

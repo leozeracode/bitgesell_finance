@@ -7,6 +7,7 @@ import type { ColumnsType, TablePaginationConfig } from "antd/es/table"
 import { useData } from "../state/data-context"
 import { Link } from "react-router-dom"
 import { createItem, type Item } from "../services/item-services"
+import { useKeywordFilter } from "hooks/use-keyword"
 
 const PAGE_SIZE = 10
 
@@ -18,24 +19,32 @@ interface CreateItemForm {
 
 const Items: React.FC = () => {
   const { data, fetchItemsData, loading } = useData()
-  const [page, setPage] = useState(1)
-  const [query, setQuery] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [form] = Form.useForm<CreateItemForm>()
+  const [filter, setFilter] = useState({
+      query: '',
+      page: 1,
+      limit: PAGE_SIZE
+    })
+  const { setSearchTerm } = useKeywordFilter({ setFilter })
 
   useEffect(() => {
     const controller = new AbortController()
-    fetchItemsData({ q: query, page, limit: PAGE_SIZE, signal: controller.signal })
+    fetchItemsData(filter, controller.signal)
     return () => controller.abort()
-  }, [query, page, fetchItemsData])
+  }, [filter, fetchItemsData])
 
   const handleSearch = (value: string) => {
-    setPage(1)
-    setQuery(value)
+    setSearchTerm(value)
   }
 
   const handlePaginationChange = (pagination: TablePaginationConfig) => {
-    if (pagination.current) setPage(pagination.current)
+    if (pagination.current) {
+      setFilter((prev) => ({
+        ...prev,
+        page: pagination.current ?? prev.page,
+      }))
+    }
   }
 
   const showModal = () => {
@@ -65,7 +74,7 @@ const Items: React.FC = () => {
       setIsModalOpen(false)
       form.resetFields()
 
-      fetchItemsData({ q: query, page, limit: PAGE_SIZE })
+      fetchItemsData(filter)
     } catch (error) {
       console.error("Error creating item:", error)
     }
@@ -97,7 +106,7 @@ const Items: React.FC = () => {
         <Col span={16}>
           <Input.Search
             placeholder="Search items..."
-            onSearch={handleSearch}
+            onChange={(e) => handleSearch(e.target.value)}
             enterButton
             allowClear
             style={{ maxWidth: 400 }}
@@ -118,9 +127,9 @@ const Items: React.FC = () => {
           columns={columns}
           dataSource={data.items}
           pagination={{
-            current: page,
+            current: filter.page,
             pageSize: PAGE_SIZE,
-            onChange: setPage,
+            onChange: (page) => setFilter((prev) => ({ ...prev, page })),
             total: data.total,
           }}
           scroll={{ y: 400 }}

@@ -18,7 +18,8 @@ describe('GetItemsController', () => {
       items: mockItems(3),
       total: 3,
       page: 1,
-      limit: filter.limit ?? 0
+      limit: filter.limit ?? 0,
+      count: 3
     }
 
     getItems = mock()
