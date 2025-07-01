@@ -64,11 +64,11 @@ describe('Items Routes', () => {
         .post('/api/item')
         .send(mockItemWithoutId())
 
-      const { status, body } = await request(app)
+      const { status, body: { items } } = await request(app)
         .get('/api/item')
 
       expect(status).toBe(200)
-      expect(body).toBeDefined()
+      expect(items.length).toBeGreaterThan(0)
     })
 
     it('should return 200 with filter', async () => {
@@ -76,12 +76,12 @@ describe('Items Routes', () => {
         .post('/api/item')
         .send(mockItemWithoutId())
 
-      const { status, body } = await request(app)
+      const { status, body: { items } } = await request(app)
         .get('/api/item')
         .query({ query: item.name })
 
       expect(status).toBe(200)
-      expect(body).toBeDefined()
+      expect(items.length).toBeGreaterThan(0)
     })
 
     it('should return 200 without items', async () => {
@@ -89,12 +89,12 @@ describe('Items Routes', () => {
         .post('/api/item')
         .send(mockItemWithoutId())
 
-      const { status, body } = await request(app)
+      const { status, body: { items } } = await request(app)
         .get('/api/item')
         .query({ query: `${item.name}x` })
 
       expect(status).toBe(200)
-      expect(body.length).toBe(0)
+      expect(items.length).toBe(0)
     })
 
     it('should return 404 if not found', async () => {

@@ -9,8 +9,6 @@ const ItemDetail: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-        console.log("🚀 ~ useEffect ~ id:", id)
-
     const controller = new AbortController()
     fetchItem(id!, controller.signal)
       .then(setItem)

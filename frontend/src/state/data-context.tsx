@@ -1,8 +1,13 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
-import { fetchItems, Item } from '../services/item-services'
+import { Fetchdata, fetchItems, Item } from '../services/item-services'
 
 interface DataContextType {
-  items: Item[]
+  data: {
+    items: Item[]
+    total: number
+    page: number
+    limit: number
+  }
   loading: boolean
   fetchItemsData: (params: { q?: string; page?: number; limit?: number; signal?: AbortSignal }) => Promise<void>
 }
@@ -10,7 +15,12 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined)
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<Item[]>([])
+  const [data, setData] = useState<Fetchdata>({
+    items: [],
+    total: 0,
+    page: 1,
+    limit: 10,
+  })
   const [loading, setLoading] = useState(false)
 
   const fetchItemsData = useCallback(
@@ -23,7 +33,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(true)
       try {
         const data = await fetchItems({ q, page, limit, signal })
-        setItems(data)
+        setData(data)
       } catch (e) {
         console.error(e)
       } finally {
@@ -34,7 +44,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   )
 
   return (
-    <DataContext.Provider value={{ items, loading, fetchItemsData }}>
+    <DataContext.Provider value={{ data, loading, fetchItemsData }}>
       {children}
     </DataContext.Provider>
   )

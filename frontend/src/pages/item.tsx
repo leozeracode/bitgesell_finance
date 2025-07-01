@@ -8,7 +8,7 @@ import type { Item } from '../services/item-services'
 const PAGE_SIZE = 10
 
 const Items: React.FC = () => {
-  const { items, fetchItemsData, loading } = useData()
+  const { data, fetchItemsData, loading } = useData()
   const [page, setPage] = useState(1)
   const [query, setQuery] = useState('')
 
@@ -63,12 +63,12 @@ const Items: React.FC = () => {
         <Table<Item>
           rowKey="id"
           columns={columns}
-          dataSource={items}
+          dataSource={data.items}
           pagination={{
             current: page,
             pageSize: PAGE_SIZE,
             onChange: setPage,
-            total: 50 
+            total: data.total,
           }}
           scroll={{ y: 400 }}
           onChange={handlePaginationChange}

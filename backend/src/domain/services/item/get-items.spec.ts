@@ -14,7 +14,12 @@ describe('GetItemsService', () => {
 
   beforeAll(() => {
     input = { query: faker.string.alpha(10), limit: faker.number.int({ min: 1, max: 100 }) }
-    output = [mockItem(), mockItem(), mockItem()]
+    output = {
+      items: [mockItem(), mockItem(), mockItem()],
+      total: 3,
+      page: 1,
+      limit: input.limit ?? 0
+    }
     itemRepository = mock()
     itemRepository.getByFilter.mockResolvedValue(output)
   })

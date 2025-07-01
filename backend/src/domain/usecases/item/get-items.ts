@@ -8,7 +8,13 @@ export namespace GetItems {
   export type Input = {
     query?: string
     limit?: number
+    page?: number
   }
 
-  export type Output = Item[]
+  export type Output = {
+    items: Item[]
+    total: number
+    page: number
+    limit: number
+  }
 }

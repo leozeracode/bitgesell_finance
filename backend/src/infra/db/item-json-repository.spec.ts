@@ -18,14 +18,14 @@ describe('ItemJsonRepository', () => {
     it('should return all items if no filter is provided', async () => {
       ;(fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockData))
 
-      const items = await repo.getByFilter({})
+      const { items } = await repo.getByFilter({})
       expect(items).toHaveLength(3)
     })
 
     it('should filter items by query', async () => {
       ;(fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockData))
 
-      const items = await repo.getByFilter({ query: mockData[0].name })
+      const { items } = await repo.getByFilter({ query: mockData[0].name })
       expect(items).toHaveLength(1)
       expect(items[0].name).toBe(mockData[0].name)
     })
@@ -33,7 +33,7 @@ describe('ItemJsonRepository', () => {
     it('should limit the number of items returned', async () => {
       ;(fs.readFile as jest.Mock).mockResolvedValue(JSON.stringify(mockData))
 
-      const items = await repo.getByFilter({ limit: 2 })
+      const { items } = await repo.getByFilter({ limit: 2 })
       expect(items).toHaveLength(2)
     })
   })

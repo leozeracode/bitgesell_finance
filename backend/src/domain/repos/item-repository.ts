@@ -15,8 +15,14 @@ export namespace ItemRepository {
   export type GetByFilterInput = {
     query?: string
     limit?: number
+    page?: number
   }
-  export type GetAllOutput = Item[]
+  export type GetAllOutput = {
+    items: Item[]
+    total: number
+    page: number
+    limit: number
+  }
   export type GetByIdOutput = Item | null
   export type SaveOutput = Item
   export type GetByIdInput = {

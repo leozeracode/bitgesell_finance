@@ -5,6 +5,13 @@ export type Item = {
   price: number
 }
 
+export type Fetchdata = {
+  items: Item[]
+  total: number
+  page: number
+  limit: number
+}
+
 export type FetchItemsParams = {
   q?: string
   page?: number
@@ -15,7 +22,7 @@ export type FetchItemsParams = {
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5555'
 
 
-export async function fetchItems(params: FetchItemsParams): Promise<Item[]> {
+export async function fetchItems(params: FetchItemsParams): Promise<Fetchdata> {
   const query = new URLSearchParams()
   if (params.q) query.append('q', params.q)
   if (params.page !== undefined) query.append('page', params.page.toString())

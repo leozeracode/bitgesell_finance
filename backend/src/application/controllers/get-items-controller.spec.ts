@@ -14,7 +14,12 @@ describe('GetItemsController', () => {
 
   beforeAll(() => {
     filter = { query: faker.string.alpha(10), limit: 10 }
-    output = mockItems(3)
+    output = {
+      items: mockItems(3),
+      total: 3,
+      page: 1,
+      limit: filter.limit ?? 0
+    }
 
     getItems = mock()
     getItems.get.mockResolvedValue(output)
