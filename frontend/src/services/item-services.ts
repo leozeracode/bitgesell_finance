@@ -53,3 +53,9 @@ export async function createItem(item: Omit<Item, 'id'>): Promise<Item> {
   if (!response.ok) throw new Error('Error creating item')
   return await response.json()
 }
+
+export async function fetchStats(signal: AbortSignal): Promise<{ total: number; averagePrice: number }> {
+  const response = await fetch(`${API_URL}/api/stats`, { signal })
+  if (!response.ok) throw new Error('Error fetching stats')
+  return await response.json()
+}

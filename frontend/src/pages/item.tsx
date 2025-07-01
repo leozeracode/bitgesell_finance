@@ -1,13 +1,15 @@
-"use client"
-
 import type React from "react"
 import { useEffect, useState } from "react"
-import { Input, Spin, Table, Modal, Form, Button, Col, Row } from "antd"
-import type { ColumnsType, TablePaginationConfig } from "antd/es/table"
+import { Input, Spin, Table, Form, Button, Col, Row, Tooltip } from "antd"
+import { ColumnsType, TablePaginationConfig } from "antd/es/table"
 import { useData } from "../state/data-context"
 import { Link } from "react-router-dom"
 import { createItem, type Item } from "../services/item-services"
 import { useKeywordFilter } from "hooks/use-keyword"
+import { StatsCard } from "components/stats"
+
+import { PlusOutlined } from "@ant-design/icons"
+import ModalCreate from "components/modal-create"
 
 const PAGE_SIZE = 10
 
@@ -22,10 +24,10 @@ const Items: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [form] = Form.useForm<CreateItemForm>()
   const [filter, setFilter] = useState({
-      query: '',
-      page: 1,
-      limit: PAGE_SIZE
-    })
+    query: '',
+    page: 1,
+    limit: PAGE_SIZE
+  })
   const { setSearchTerm } = useKeywordFilter({ setFilter })
 
   useEffect(() => {
@@ -101,96 +103,58 @@ const Items: React.FC = () => {
   ]
 
   return (
-    <div style={{ padding: 24 }}>
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col span={16}>
-          <Input.Search
-            placeholder="Search items..."
-            onChange={(e) => handleSearch(e.target.value)}
-            enterButton
-            allowClear
-            style={{ maxWidth: 400 }}
-          />
-        </Col>
-        <Col span={8}>
-          <Button type="primary" onClick={showModal}>
-            Create New Item
-          </Button>
-        </Col>
-      </Row>
+    <div>
+      <Col span={24}>
+        <Row gutter={16} justify='space-between' align='middle'>
+          <Col>
+            <Tooltip placement="right" title='Create New Item'>
+              <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={showModal}/>
+            </Tooltip>
+          </Col>
+          <Col>
+            <Col><StatsCard /></Col>
+          </Col>
+        </Row>
+      </Col>
 
       {loading ? (
         <Spin size="large" />
       ) : (
-        <Table<Item>
-          rowKey="id"
-          columns={columns}
-          dataSource={data.items}
-          pagination={{
-            current: filter.page,
-            pageSize: PAGE_SIZE,
-            onChange: (page) => setFilter((prev) => ({ ...prev, page })),
-            total: data.total,
-          }}
-          scroll={{ y: 400 }}
-          onChange={handlePaginationChange}
-        />
+        <Col span={24}>
+          <Row gutter={[16, 16]} justify='start'>
+            <Col>
+              <Input.Search
+                placeholder="Search items..."
+                onChange={(e) => handleSearch(e.target.value)}
+                enterButton
+                allowClear
+                style={{ maxWidth: 400 }}
+              />
+            </Col>
+            <Col span={24}>
+              <Table<Item>
+                rowKey="id"
+                columns={columns}
+                dataSource={data.items}
+                pagination={{
+                  current: filter.page,
+                  pageSize: PAGE_SIZE,
+                  onChange: (page) => setFilter((prev) => ({ ...prev, page })),
+                  total: data.total,
+                }}
+                scroll={{ y: 400 }}
+                onChange={handlePaginationChange}
+              />
+            </Col>
+          </Row>
+        </Col>
       )}
-
-      <Modal title="Create New Item" open={isModalOpen} onCancel={handleCancel} footer={null} width={600}>
-        <Form form={form} layout="vertical" onFinish={handleSubmit} style={{ marginTop: 16 }}>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                label="Name"
-                name="name"
-                rules={[
-                  { required: true, message: "Please input the item name!" },
-                  { min: 2, message: "Name must be at least 2 characters long!" },
-                ]}
-              >
-                <Input placeholder="Enter item name" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                label="Category"
-                name="category"
-                rules={[{ required: true, message: "Please input the category!" }]}
-              >
-                <Input placeholder="Enter category" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                label="Price"
-                name="price"
-                rules={[
-                  { required: true, message: "Please input the price!" },
-                ]}
-              >
-                <Input type="number" placeholder="Enter price" step="0.01" min="0" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
-                <Button onClick={handleCancel} style={{ marginRight: 8 }}>
-                  Cancel
-                </Button>
-                <Button type="primary" htmlType="submit">
-                  Create Item
-                </Button>
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-      </Modal>
+      <ModalCreate 
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancel}
+        form={form}
+        handleSubmit={handleSubmit}
+      />
     </div>
   )
 }
